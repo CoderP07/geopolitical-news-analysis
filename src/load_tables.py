@@ -4,8 +4,13 @@ import psycopg2
 
 def get_connection():
     url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
     if url.startswith("postgres://"):
         url = url.replace("postgres://", "postgresql://", 1)
+
     return psycopg2.connect(url)
 
 
