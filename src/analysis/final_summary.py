@@ -1,3 +1,4 @@
+import os
 import re
 from .summary_quality import finalize_summary_json
 from models import Batch, BatchAnalysis, EventSummary, SourceLink
@@ -8,7 +9,10 @@ from .specs import (
 from openai import OpenAI
 import json
 
-client = OpenAI(api_key="OPENAI_API_KEY")
+openai_key = os.getenv("OPENAI_API_KEY")
+if not openai_key:
+    raise ValueError("OPENAI_API_KEY is not set")
+client = OpenAI(api_key=openai_key)
 
 
 def summary_content_cap_for_batch_type(batch_type: str) -> int:

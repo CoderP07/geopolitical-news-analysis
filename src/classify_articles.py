@@ -1,9 +1,13 @@
+import os
 from models import NormalizedArticle, SupportScore, RuleSupport, ClassificationResult
 from openai import OpenAI
 import json
 from db import insert_classification_results
 
-client = OpenAI(api_key="OPENAI_API_KEY")
+openai_key = os.getenv("OPENAI_API_KEY")
+if not openai_key:
+    raise ValueError("OPENAI_API_KEY is not set")
+client = OpenAI(api_key=openai_key)
 
 
 def call_classification_llm(

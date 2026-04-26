@@ -16,7 +16,10 @@ from .specs import (
     EXPLANATORY_SCHEMA,
 )
 
-client = OpenAI(api_key="OPENAI_API_KEY")
+openai_key = os.getenv("OPENAI_API_KEY")
+if not openai_key:
+    raise ValueError("OPENAI_API_KEY is not set")
+client = OpenAI(api_key=openai_key)
 
 
 def get_connection():

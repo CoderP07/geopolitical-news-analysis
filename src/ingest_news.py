@@ -1,14 +1,5 @@
-"""
-Ingestion stage only.
-
-Responsibilities:
-- call NewsAPI
-- handle pagination and bounded retries
-- parse responses into RawArticle objects
-- preserve ingestion metadata needed for downstream tracing
-"""
-
 from datetime import datetime, timedelta, UTC
+import os
 from newsapi import NewsApiClient
 from typing import Optional
 from models import RawArticle
@@ -45,7 +36,11 @@ def ingest_articles(lower: datetime, upper: datetime) -> list[RawArticle]:
 
     query = '("Iran") AND ("Israel" OR "nuclear program" OR "Strait of Hormuz" OR "US-Iran" OR "peace talks" OR "ceasefire" OR "blockade")'
 
-    newsapi = NewsApiClient(api_key="NEWSAPI_KEY")
+    news_key = os.getenv("NEWS_API_KEY")
+    if not news_key:
+        raise ValueError("NEWS_API_KEY is not set")
+
+    newsapi = NewsApiClient(api_key=news_key)
     response = newsapi.get_everything(
         q=query,
         from_param=from_param,

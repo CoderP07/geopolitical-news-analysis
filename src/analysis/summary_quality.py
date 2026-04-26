@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+import os
 from typing import Any
 from copy import deepcopy
 import re
@@ -713,7 +714,10 @@ def finalize_summary_json(
 if __name__ == "__main__":
     from openai import OpenAI
 
-    client = OpenAI(api_key="OPENAI_API_KEY")
+    openai_key = os.getenv("OPENAI_API_KEY")
+    if not openai_key:
+        raise ValueError("OPENAI_API_KEY is not set")
+    client = OpenAI(api_key=openai_key)
 
     # Paste your JSON here (exactly as dict, not string)
     test_summary = {}
