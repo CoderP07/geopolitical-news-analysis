@@ -1,3 +1,5 @@
+import os
+
 import psycopg2
 
 from db import insert_batch_analyses
@@ -18,13 +20,15 @@ client = OpenAI(api_key="OPENAI_API_KEY")
 
 
 def get_connection():
-    return psycopg2.connect(
-        dbname="news_pipline",
-        user="postgres",
-        password="9320",
-        host="localhost",
-        port=5432,
-    )
+    url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    return psycopg2.connect(url)
 
 
 def mark_batch_analyzed(batch_id: int) -> None:

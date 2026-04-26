@@ -1,16 +1,19 @@
 import json
+import os
 import psycopg2
 from datetime import datetime, timezone
 
 
 def get_connection():
-    return psycopg2.connect(
-        dbname="news_pipline",
-        user="postgres",
-        password="9320",
-        host="localhost",
-        port=5432,
-    )
+    url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    return psycopg2.connect(url)
 
 
 def latest_article_published_at(event: dict) -> str:

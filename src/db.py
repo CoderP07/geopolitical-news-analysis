@@ -1,4 +1,5 @@
 from http.client import CONFLICT
+import os
 
 import psycopg2
 import json
@@ -12,13 +13,15 @@ from models import (
 
 
 def get_connection():
-    return psycopg2.connect(
-        dbname="news_pipline",
-        user="postgres",
-        password="9320",
-        host="localhost",
-        port=5432,
-    )
+    url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    return psycopg2.connect(url)
 
 
 def get_latest_batch_run_id() -> str | None:

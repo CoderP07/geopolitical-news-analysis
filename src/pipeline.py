@@ -1,5 +1,6 @@
 from asyncio import events
 from datetime import datetime, timedelta, UTC, time, date
+import os
 from uuid import uuid4
 import psycopg2
 
@@ -42,13 +43,15 @@ from db import find_open_batch_id, append_articles_to_batch, insert_batches
 
 
 def get_connection():
-    return psycopg2.connect(
-        dbname="news_pipline",
-        user="postgres",
-        password="9320",
-        host="localhost",
-        port=5432,
-    )
+    url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    return psycopg2.connect(url)
 
 
 def get_latest_analyzed_batch_run_id(

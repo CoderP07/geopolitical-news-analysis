@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
@@ -15,13 +17,15 @@ app.add_middleware(
 
 
 def get_connection():
-    return psycopg2.connect(
-        dbname="news_pipline",
-        user="postgres",
-        password="9320",
-        host="localhost",
-        port=5432,
-    )
+    url = os.getenv("DATABASE_URL")
+
+    if not url:
+        raise ValueError("DATABASE_URL is not set")
+
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    return psycopg2.connect(url)
 
 
 @app.get("/api/events")
