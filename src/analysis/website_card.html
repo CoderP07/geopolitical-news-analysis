@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geopolitical News Analysis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(77, 102, 255, 0.12), transparent 28%),
+        radial-gradient(circle at 82% 10%, rgba(170, 82, 255, 0.10), transparent 24%),
+        linear-gradient(180deg, #020816 0%, #041128 58%, #030917 100%);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: #f4f7fb;
+    }
+
+    .world-map {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        radial-gradient(circle, rgba(145, 165, 255, 0.7) 1px, transparent 1.3px);
+      background-size: 7px 7px;
+      clip-path: polygon(52% 14%, 60% 10%, 69% 13%, 76% 17%, 80% 24%, 86% 28%, 92% 39%, 93% 48%, 88% 50%, 82% 43%, 76% 39%, 74% 28%, 68% 23%, 61% 26%, 57% 32%, 52% 29%, 48% 22%);
+      transform: translate(18%, 1%) scale(1.35);
+    }
+
+    .page-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(111, 129, 255, 0.18);
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 24px 80px rgba(0, 0, 0, 0.45);
+      background: linear-gradient(180deg, rgba(3, 11, 28, 0.9), rgba(4, 11, 29, 0.98));
+    }
+
+    .section-label {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .panel-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="min-h-screen px-4 py-4 sm:px-6 lg:px-8">
+    <div class="page-frame mx-auto max-w-7xl rounded-[2px]">
+      <div class="world-map"></div>
+
+      <div class="relative z-10 p-4 sm:p-8 lg:p-10">
+        <header class="relative mb-10 bg-slate-950/60 p-5 shadow-xl sm:p-6">
+          <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-15 blur-sm">
+          </div>
+          <div class="absolute inset-px border border-white/5 bg-[#041022]/95"></div>
+
+          <div class="relative flex items-center gap-4">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 text-white">
+              <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.6">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M3 12h18"></path>
+                <path d="M12 3a15 15 0 0 1 0 18"></path>
+                <path d="M12 3a15 15 0 0 0 0 18"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                GEOPOLITICAL NEWS ANALYSIS
+              </h1>
+            </div>
+          </div>
+        </header>
+
+        <section class="mb-10">
+          <div>
+            <h2 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-semibold leading-tight text-white">
+              Iran War: Comprehensive Breakdown & Strategic Insights
+            </h2>
+          </div>
+        </section>
+
+        <section id="breaking-news-section" class="mb-10">
+          <div class="mb-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-semibold text-indigo-200 tracking-wide">
+                Latest Event Briefings
+              </h3>
+            </div>
+          </div>
+
+          <div id="breaking-news-grid" class="mt-3 grid gap-6 md:grid-cols-2"></div>
+        </section>
+
+        <div id="event-divider" class="my-8 h-[2px] bg-indigo-400/50"></div>
+
+        <section id="event-grid" class="grid gap-6 md:grid-cols-2"></section>
+      </div>
+    </div>
+    </div>
+  </main>
+
+  <script>
+    const breakingNewsSection = document.getElementById("breaking-news-section");
+    const breakingNewsGrid = document.getElementById("breaking-news-grid");
+    const eventGrid = document.getElementById("event-grid");
+    let events = [];
+
+    function createSlug(text) {
+      return text
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function createCardMarkup(eventItem) {
+      const type = (eventItem.batch_type || "").toLowerCase();
+
+      let analysisLabel = "";
+      if (type.includes("explanatory")) {
+        analysisLabel = "Explanatory Analysis";
+      } else if (type.includes("multiactor")) {
+        analysisLabel = "Multiactor Analysis";
+      }
+
+      return `
+    <a class="panel-link" href="./event_detail.html?event=${encodeURIComponent(createSlug(eventItem.headline))}">
+      <article class="group relative flex min-h-[160px] flex-col bg-slate-950 p-5 shadow-xl transition-all duration-300 ease-out hover:-translate-y-[3px] hover:translate-x-[2px] hover:shadow-2xl hover:shadow-black/40">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-sm transition-opacity duration-300 group-hover:opacity-30"></div>
+        <div class="absolute inset-px bg-slate-950"></div>
+
+        <div class="relative flex h-full flex-col">
+          ${analysisLabel ? `
+            <p class="mb-3 text-xs font-medium uppercase tracking-wide text-indigo-300">
+              ${analysisLabel}
+            </p>
+          ` : ""}
+
+          <h3 class="max-w-[22rem] text-xl font-semibold leading-snug text-white">
+            ${eventItem.headline}
+          </h3>
+
+          <div class="mt-3 h-0.5 w-8 bg-indigo-400"></div>
+
+          <p class="relative mt-4 max-w-md text-sm leading-6 text-slate-300">
+            ${eventItem.deck}
+          </p>
+        </div>
+      </article>
+    </a>
+  `;
+    }
+
+    async function loadEvents() {
+      const response = await fetch("http://127.0.0.1:8000/api/events");
+      events = await response.json();
+
+      const fourHoursAgo = Date.now() - 4 * 60 * 60 * 1000;
+
+      const breakingEvents = events.filter((eventItem) => {
+        if (!eventItem.created_at) return false;
+        const createdAt = new Date(eventItem.created_at).getTime();
+        return Number.isFinite(createdAt) && createdAt >= fourHoursAgo;
+      });
+
+      const mainEvents = events.filter((eventItem) => {
+        if (!eventItem.created_at) return true;
+        const createdAt = new Date(eventItem.created_at).getTime();
+        return !Number.isFinite(createdAt) || createdAt < fourHoursAgo;
+      });
+
+      if (breakingEvents.length === 0) {
+        breakingNewsSection.classList.add("hidden");
+        breakingNewsGrid.innerHTML = "";
+      } else {
+        breakingNewsSection.classList.remove("hidden");
+        breakingNewsGrid.innerHTML = breakingEvents.map(createCardMarkup).join("");
+      }
+
+      eventGrid.innerHTML = mainEvents.map(createCardMarkup).join("");
+    }
+
+    loadEvents();
+  </script>
+</body>
+
+</html>

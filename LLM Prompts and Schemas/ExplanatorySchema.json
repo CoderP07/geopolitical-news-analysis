@@ -1,0 +1,57 @@
+{
+    "information_quality": {
+        "source_count": 1,
+        "source_detail_level": "low | medium | high",
+        "missing_critical_information": [],
+        "analysis_limitations": []
+    },
+    "topic": {
+        "name": "",
+        "type": "system | process | concept | institution | technology | scientific_claim | other"
+    },
+    "explanatory_core": {
+        "question_being_answered": "",
+        "main_explanation": "",
+        "direct_definition": ""
+    },
+    "mechanism": {
+        "steps": [],
+        "causal_chain_strength": "clear | partial | weak",
+        "confidence": "inferred"
+    },
+    "scope_and_limits": {
+        "where_explanation_applies": [],
+        "where_it_may_not_apply": [],
+        "unstated_boundary_conditions": []
+    },
+    "support_basis": {
+        "support_types": [
+            "definition | example | expert_statement | study | analogy | historical_case | assertion"
+        ],
+        "support_strength": "low | medium | high",
+        "dependence_on_analogy": "low | medium | high"
+    },
+    "claim_load": {
+        "central_claims": [],
+        "strongly_supported_claims": [],
+        "weakly_supported_claims": [],
+        "unsupported_or_overextended_claims": []
+    },
+    "failure_points": [
+        {
+            "failure_type": "missing_mechanism | oversimplification | unstated_scope_limit | causal_overreach | analogy_substitution | ambiguity",
+            "location_or_pattern": "",
+            "why_it_matters": ""
+        }
+    ],
+    "reader_risk": {
+        "main_risk": "confusion | false certainty | causal misread | overgeneralization",
+        "why_reader_could_be_misled": "",
+        "safer_interpretation": ""
+    },
+    "practical_takeaway": {
+        "what_reader_can_reasonably_take_away": "",
+        "what_reader_should_not_conclude": ""
+    },
+    "unknowns": []
+}

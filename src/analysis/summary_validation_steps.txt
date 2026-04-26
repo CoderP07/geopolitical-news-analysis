@@ -1,0 +1,54 @@
+Pass 1
+
+Draft generator 
+Returns full EventSummary JSON
+
+Deterministic validation
+
+Checks:
+
+schema compliance
+missing fields
+malformed Unicode / mixed-script artifacts
+incomplete sentence endings
+field length
+empty required fields
+Pass 2 only if needed
+
+Repair model
+Returns:
+
+issues found
+exact field replacements
+Final deterministic validation
+
+Have the repair model return something like:
+
+{
+  "is_valid_after_repair": true,
+  "issues_found": [
+    {
+      "field": "executive_summary",
+      "problem": "Ends with an incomplete clause"
+    },
+    {
+      "field": "deck",
+      "problem": "Contains malformed mixed-language token"
+    }
+  ],
+  "repairs": [
+    {
+      "field": "executive_summary",
+      "replace_with": "..."
+    },
+    {
+      "field": "deck",
+      "replace_with": "..."
+    }
+  ]
+}
+If it passes, save it.
+If it fails again, either:
+
+mark invalid
+or do one last full regeneration if you want a fallback

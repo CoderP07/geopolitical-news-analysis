@@ -1,0 +1,71 @@
+{
+  "information_quality": {
+    "source_count": 1,
+    "source_detail_level": "low | medium | high",
+    "missing_critical_information": [],
+    "analysis_limitations": []
+  },
+  "story_core": {
+    "central_subject": "",
+    "story_type": "individual_case | family_case | local_case | illustrative_case | multi_case_feature | profile",
+    "main_theme": ""
+  },
+  "implied_social_or_general_message": {
+    "message": "",
+    "confidence": "inferred"
+  },
+  "observed_case_details": [],
+  "context_support": {
+    "broader_data_present": true,
+    "broader_data_summary": "",
+    "expert_context_present": true,
+    "expert_context_summary": "",
+    "context_strength": "low | medium | high"
+  },
+  "representativeness_check": {
+    "is_case_representative": "supported | unclear | unlikely",
+    "confidence": "inferred",
+    "basis_for_assessment": "",
+    "missing_base_rate_or_comparison_data": []
+  },
+  "claim_support": {
+    "case_level_claims": [],
+    "broader_social_claims": [],
+    "broader_claims_supported": [],
+    "broader_claims_not_supported_without_more_evidence": []
+  },
+  "narrative_pressure": {
+    "present": true,
+    "overall_intensity": "low | medium | high",
+    "features": [
+      {
+        "feature": "personalization | vivid_detail | emotional_contrast | symbolic_case | moral_positioning | implicit_generalization",
+        "reader_effect": ""
+      }
+    ]
+  },
+  "failure_points": {
+    "present": true,
+    "severity": "low | medium | high",
+    "items": [
+      {
+        "failure_type": "overgeneralization | selection_bias | emotional_substitution | missing_base_rate | attribution_error | symbolic_overload",
+        "location_or_pattern": "",
+        "why_it_matters": ""
+      }
+    ]
+  },
+  "reader_risk": {
+    "present": true,
+    "severity": "low | medium | high",
+    "main_risk": "overgeneralization | emotional overreaction | false certainty | causal misread | none",
+    "why_reader_could_be_misled": "",
+    "safer_interpretation": ""
+  },
+  "fair_assessment": {
+    "direct_support_boundary": "",
+    "suggestive_but_unproven": "",
+    "generalization_requirements": ""
+  },
+  "unknowns": []
+}
