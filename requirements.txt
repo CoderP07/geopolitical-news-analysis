@@ -1,3 +1,4 @@
+newsapi-python
 fastapi
 uvicorn
 psycopg2-binary
