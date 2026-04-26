@@ -3,8 +3,18 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import psycopg2
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="src/analysis"), name="static")
+
+
+@app.get("/")
+def homepage():
+    return FileResponse("src/analysis/website_card.html")
+
 
 # allow your frontend to call this API
 app.add_middleware(

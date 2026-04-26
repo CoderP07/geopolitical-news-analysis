@@ -166,7 +166,7 @@
     }
 
     async function loadEvents() {
-      const response = await fetch("http://127.0.0.1:8000/api/events");
+      const response = fetch("/api/events");
       events = await response.json();
 
       const fourHoursAgo = Date.now() - 4 * 60 * 60 * 1000;
