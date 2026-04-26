@@ -16,6 +16,11 @@ def homepage():
     return FileResponse("src/analysis/website_card.html")
 
 
+@app.get("/event_detail.html")
+def event_detail():
+    return FileResponse("src/analysis/event_detail.html")
+
+
 # allow your frontend to call this API
 app.add_middleware(
     CORSMiddleware,
