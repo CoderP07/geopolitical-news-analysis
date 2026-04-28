@@ -25,14 +25,23 @@ def regenerate_website_summaries():
 
     print(f"[FILTERED PAIRS] {len(pairs)}")
 
+    if not pairs:
+        print(
+            "[STOP] No matching batch analyses found. Check TARGET_ANALYSIS_IDS or summary_version."
+        )
+        return
+
     summaries = []
     for i, (batch, analysis) in enumerate(pairs, start=1):
-        print(f"[REGENERATE] {i}/{len(pairs)} batch_id={batch.id}")
+        print(
+            f"[REGENERATE] {i}/{len(pairs)} batch_id={batch.id} analysis_id={analysis.id}"
+        )
         event_summary = summarize_event_for_website(batch, analysis)
-        print(f"[SUMMARY] valid={event_summary.is_valid}")
+        print(
+            f"[SUMMARY] valid={event_summary.is_valid} failure={event_summary.failure_reason}"
+        )
         summaries.append(event_summary)
 
-    print(vars(analysis))
     print(f"[INSERT] summaries={len(summaries)}")
     insert_event_summaries(summaries, summary_version=SUMMARY_VERSION)
 
