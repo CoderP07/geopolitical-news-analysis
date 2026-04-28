@@ -52,12 +52,13 @@ def get_events():
         """
         SELECT event_json
         FROM website_event_summaries
-        WHERE summary_version = %s
+        WHERE summary_version = (
+            SELECT MAX(summary_version)
+            FROM website_event_summaries
+        )
         ORDER BY created_at DESC, event_summary_id DESC;
-    """,
-        ("v1",),
+    """
     )
-
     rows = cur.fetchall()
     cur.close()
     conn.close()
