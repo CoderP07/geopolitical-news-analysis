@@ -109,8 +109,9 @@
               </div>
             </div>
 
-            <a href="./website_card.html"
-              class="inline-flex items-center justify-center rounded-sm border border-indigo-300/20 bg-slate-950/60 px-4 py-2 text-sm font-medium text-indigo-200 transition hover:border-indigo-300/40 hover:bg-slate-900">
+            <a href="/">
+              class="inline-flex items-center justify-center rounded-sm border border-indigo-300/20 bg-slate-950/60 px-4
+              py-2 text-sm font-medium text-indigo-200 transition hover:border-indigo-300/40 hover:bg-slate-900">
               Back to Dashboard
             </a>
           </div>
@@ -326,7 +327,7 @@
     }
 
     async function loadEventDetail() {
-      const response = await fetch("http://127.0.0.1:8000/api/events");
+      const response = await fetch("/api/events");
       const events = await response.json();
 
       const eventData =
