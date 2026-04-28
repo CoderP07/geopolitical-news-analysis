@@ -231,7 +231,7 @@ if __name__ == "__main__":
 
     batch_analysis_pairs = load_batches_with_analysis_for_summary(
         analysis_version="v1",
-        summary_version="v1",
+        summary_version="v2",
     )
 
     print(f"Loaded {len(batch_analysis_pairs)} batch+analysis pairs from DB.")
@@ -252,10 +252,10 @@ if __name__ == "__main__":
         print(f"[EVENT SUMMARY] headline={event_summary.headline}")
 
     if summaries:
-        insert_event_summaries(summaries, summary_version="v1")
+        insert_event_summaries(summaries, summary_version="v2")
 
         # NEW: export to frontend
-        events = load_event_summaries_for_website(summary_version="v1")
+        events = load_event_summaries_for_website(summary_version="v2")
         write_events_to_website_table(events)
 
         print(f"[EXPORT] Wrote {len(events)} events to website table")

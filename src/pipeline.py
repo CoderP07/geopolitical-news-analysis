@@ -226,7 +226,7 @@ def run_pipeline():
     # 9. Load only this run_id's batch analyses for final website summaries
     batch_analysis_pairs = load_batches_with_analysis_for_summary(
         analysis_version="v1",
-        summary_version="v1",
+        summary_version="v2",
     )
 
     print(f"[ANALYSIS LOAD] batches={len(batches_for_analysis)}")
@@ -244,7 +244,7 @@ def run_pipeline():
         )
 
     if summaries:
-        insert_event_summaries(summaries, summary_version="v1")
+        insert_event_summaries(summaries, summary_version="v2")
         print(f"[SUMMARY INSERT] summaries={len(summaries)}")
     else:
         print("[SUMMARY INSERT] no summaries")
@@ -253,9 +253,9 @@ def run_pipeline():
     delete_old_event_summaries(retention_days=4)
 
     # 10. Export valid summaries to frontend events.js
-    events = load_event_summaries_for_website(summary_version="v1")
+    events = load_event_summaries_for_website(summary_version="v2")
     events = dedupe_events_for_website(events)
-    write_events_to_website_table(events, summary_version="v1")
+    write_events_to_website_table(events, summary_version="v2")
 
     print(f"[EXPORT] wrote {len(events)} events to website_event_summaries")
 
