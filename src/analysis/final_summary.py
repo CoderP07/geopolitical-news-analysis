@@ -191,7 +191,7 @@ def summarize_event_for_website(batch: Batch, analysis: BatchAnalysis) -> EventS
             headline=final_json["headline"],
             deck=final_json["deck"],
             website_summary=final_json["executive_summary"],
-            key_points=final_json["key_points"],
+            key_points=[],
             source_titles=[article.title for article in batch.articles],
             source_links=source_links,
             is_valid=True,
