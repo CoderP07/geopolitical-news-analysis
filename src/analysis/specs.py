@@ -1271,16 +1271,18 @@ EVENT_SUMMARY_SCHEMA = {
         "headline",
         "deck",
         "executive_summary",
-        "situation",
         "primary_dynamics",
         "constraints_and_pressures",
-        "analytic_logic",
+        "core_logic",
+        "key_dependencies",
+        "tradeoffs",
         "risks",
         "what_to_watch",
-        "key_points",
         "open_questions",
         "interpretation_guardrails",
         "confidence",
+        "information_gaps",
+        "sources",
     ],
     "properties": {
         "headline": {
@@ -1291,40 +1293,13 @@ EVENT_SUMMARY_SCHEMA = {
             "type": "string",
             "maxLength": 220,
         },
+        # STATE
         "executive_summary": {
             "type": "string",
-            "minLength": 180,
-            "maxLength": 1400,
+            "minLength": 220,
+            "maxLength": 1200,
         },
-        "situation": {
-            "type": "array",
-            "minItems": 2,
-            "maxItems": 5,
-            "items": {
-                "type": "object",
-                "required": ["label", "text"],
-                "properties": {
-                    "label": {
-                        "type": "string",
-                        "enum": [
-                            "core_development",
-                            "immediate_context",
-                            "diplomatic_status",
-                            "military_status",
-                            "market_effect",
-                            "system_state",
-                            "process_status",
-                            "information_status",
-                        ],
-                    },
-                    "text": {
-                        "type": "string",
-                        "maxLength": 420,
-                    },
-                },
-                "additionalProperties": False,
-            },
-        },
+        # STRUCTURE
         "primary_dynamics": {
             "type": "array",
             "minItems": 2,
@@ -1379,83 +1354,44 @@ EVENT_SUMMARY_SCHEMA = {
             "maxItems": 5,
             "items": {
                 "type": "string",
-                "maxLength": 400,
+                "maxLength": 420,
             },
         },
-        "analytic_logic": {
-            "type": "object",
-            "required": [
-                "core_logic",
-                "key_dependencies",
-                "tradeoffs",
-                "signaling_or_mechanism",
-            ],
-            "properties": {
-                "core_logic": {
-                    "type": "string",
-                    "minLength": 420,
-                    "maxLength": 1100,
-                },
-                "key_dependencies": {
-                    "type": "array",
-                    "minItems": 2,
-                    "maxItems": 5,
-                    "items": {
-                        "type": "object",
-                        "required": ["depends_on", "enables"],
-                        "properties": {
-                            "depends_on": {
-                                "type": "string",
-                                "maxLength": 200,
-                            },
-                            "enables": {
-                                "type": "string",
-                                "maxLength": 200,
-                            },
-                        },
-                        "additionalProperties": False,
-                    },
-                },
-                "tradeoffs": {
-                    "type": "array",
-                    "minItems": 2,
-                    "maxItems": 5,
-                    "items": {
+        "core_logic": {
+            "type": "string",
+            "minLength": 420,
+            "maxLength": 1100,
+        },
+        "key_dependencies": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+                "type": "object",
+                "required": ["depends_on", "enables"],
+                "properties": {
+                    "depends_on": {
                         "type": "string",
-                        "maxLength": 250,
+                        "maxLength": 220,
+                    },
+                    "enables": {
+                        "type": "string",
+                        "maxLength": 260,
                     },
                 },
-                "signaling_or_mechanism": {
-                    "type": "array",
-                    "minItems": 2,
-                    "maxItems": 5,
-                    "items": {
-                        "type": "object",
-                        "required": [
-                            "action_or_step",
-                            "interpretation",
-                            "target_or_relevance",
-                        ],
-                        "properties": {
-                            "action_or_step": {
-                                "type": "string",
-                                "maxLength": 250,
-                            },
-                            "interpretation": {
-                                "type": "string",
-                                "maxLength": 250,
-                            },
-                            "target_or_relevance": {
-                                "type": "string",
-                                "maxLength": 250,
-                            },
-                        },
-                        "additionalProperties": False,
-                    },
-                },
+                "additionalProperties": False,
             },
-            "additionalProperties": False,
         },
+        "tradeoffs": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 5,
+            "items": {
+                "type": "string",
+                "maxLength": 300,
+            },
+        },
+        # FORWARD VIEW
         "risks": {
             "type": "array",
             "minItems": 2,
@@ -1466,7 +1402,7 @@ EVENT_SUMMARY_SCHEMA = {
                 "properties": {
                     "risk": {
                         "type": "string",
-                        "maxLength": 300,
+                        "maxLength": 320,
                     },
                     "time_horizon": {
                         "type": "string",
@@ -1474,7 +1410,7 @@ EVENT_SUMMARY_SCHEMA = {
                     },
                     "basis": {
                         "type": "string",
-                        "maxLength": 300,
+                        "maxLength": 320,
                     },
                 },
                 "additionalProperties": False,
@@ -1486,18 +1422,8 @@ EVENT_SUMMARY_SCHEMA = {
             "maxItems": 9,
             "items": {
                 "type": "string",
-                "minLength": 80,
+                "minLength": 70,
                 "maxLength": 220,
-            },
-        },
-        "key_points": {
-            "type": "array",
-            "minItems": 5,
-            "maxItems": 7,
-            "items": {
-                "type": "string",
-                "minLength": 90,
-                "maxLength": 280,
             },
         },
         "open_questions": {
@@ -1506,20 +1432,25 @@ EVENT_SUMMARY_SCHEMA = {
             "maxItems": 5,
             "items": {
                 "type": "string",
-                "maxLength": 220,
+                "maxLength": 240,
             },
         },
+        # META
         "interpretation_guardrails": {
             "type": "object",
-            "required": ["reasonable_takeaway", "do_not_conclude", "main_reader_risk"],
+            "required": [
+                "reasonable_takeaway",
+                "do_not_conclude",
+                "main_reader_risk",
+            ],
             "properties": {
                 "reasonable_takeaway": {
                     "type": "string",
-                    "maxLength": 240,
+                    "maxLength": 260,
                 },
                 "do_not_conclude": {
                     "type": "string",
-                    "maxLength": 240,
+                    "maxLength": 260,
                 },
                 "main_reader_risk": {
                     "type": "string",
@@ -1539,8 +1470,6 @@ EVENT_SUMMARY_SCHEMA = {
                 "level",
                 "reason",
                 "source_detail_level",
-                "analysis_limitations",
-                "missing_critical_information",
             ],
             "properties": {
                 "level": {
@@ -1555,26 +1484,64 @@ EVENT_SUMMARY_SCHEMA = {
                     "type": "string",
                     "enum": ["low", "medium", "high"],
                 },
+            },
+            "additionalProperties": False,
+        },
+        "information_gaps": {
+            "type": "object",
+            "required": [
+                "analysis_limitations",
+                "missing_critical_information",
+            ],
+            "properties": {
                 "analysis_limitations": {
-                    "type": "array",
-                    "minItems": 0,
-                    "maxItems": 3,
-                    "items": {
-                        "type": "string",
-                        "maxLength": 220,
-                    },
-                },
-                "missing_critical_information": {
                     "type": "array",
                     "minItems": 0,
                     "maxItems": 4,
                     "items": {
                         "type": "string",
-                        "maxLength": 220,
+                        "maxLength": 240,
+                    },
+                },
+                "missing_critical_information": {
+                    "type": "array",
+                    "minItems": 0,
+                    "maxItems": 5,
+                    "items": {
+                        "type": "string",
+                        "maxLength": 240,
                     },
                 },
             },
             "additionalProperties": False,
+        },
+        "sources": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "items": {
+                "type": "object",
+                "required": [
+                    "title",
+                    "url",
+                    "published_at",
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "maxLength": 300,
+                    },
+                    "url": {
+                        "type": "string",
+                        "maxLength": 1000,
+                    },
+                    "published_at": {
+                        "type": "string",
+                        "maxLength": 80,
+                    },
+                },
+                "additionalProperties": False,
+            },
         },
     },
     "additionalProperties": False,
@@ -1632,12 +1599,19 @@ STYLE RULES
 - No generic filler.
 - Every sentence should carry information.
 
+DENSITY PRESERVATION RULE:
+Do not reduce informational content when applying structural framing.
+Replace surface descriptions with deeper structural meaning, rather than removing detail.
+
 COMPRESSION RULES
 - Avoid repeating the same point across sections.
 - Headline, deck, executive_summary, and key_points must each contribute something distinct.
 - Prefer specific mechanisms over vague summaries.
 - Omit low-value background before omitting high-value conflict dynamics.
 - Do not save the strongest analysis only for the executive summary. Analytic Logic, What to Watch, and Key Points must each carry substantial independent value.
+
+PRIORITY RULE:
+When compression and density preservation conflict, preserve informational content and rephrase instead of deleting.
 
 GLOBAL COHERENCE RULE
 - All sections must describe the same underlying situation from different analytical angles.
@@ -1766,8 +1740,19 @@ KEY POINTS STRUCTURE RULE
   (c) show its implication
 
 11. OPEN_QUESTIONS
-- List unresolved issues that materially limit interpretation.
-- Focus on high-impact unknowns.
+- List unresolved issues that could materially change the trajectory of the situation.
+
+STRICT RULE:
+Each question must include implicit or explicit impact framing.
+
+Test:
+If the answer to the question would NOT change the assessment, remove it.
+
+Good Example:
+- "If Iran accepts indirect talks as sufficient, would a negotiation channel reopen?"
+
+Bad Example:
+- "What did Iran propose?"  ← (this is missing info, not a forward question)
 
 12. INTERPRETATION_GUARDRAILS
 - State what the reader can reasonably conclude from the material.
@@ -1779,6 +1764,37 @@ KEY POINTS STRUCTURE RULE
 - High: facts are consistent and the situation is well specified.
 - Medium: core facts are clear but key terms or next steps remain unresolved.
 - Low: reporting is partial, conflicting, or incomplete.
+
+14. INFORMATION_GAPS
+Split into two categories:
+
+1) analysis_limitations
+- Limitations in reporting or analysis quality
+- Example:
+  - "One source is partial or truncated"
+  - "Attribution is unclear"
+
+2) missing_critical_information
+- Specific facts that are not available in the reporting
+
+STRICT RULE:
+These must be static absences of evidence, not forward-looking questions.
+
+Test:
+If it can be phrased as:
+"If X is true, then Y would change" → it belongs in Open Questions
+
+If it is:
+"X is not available in reporting" → it belongs here
+
+Good Example:
+- "The exact contents of the U.S. proposal are not reported"
+
+Bad Example:
+- "What was in the U.S. proposal?"  ← (this is an Open Question)
+
+NON-OVERLAP RULE:
+No item in INFORMATION_GAPS may be restated as a question in OPEN_QUESTIONS.
 
 - Include:
   - a reason tied to evidence quality

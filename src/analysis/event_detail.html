@@ -109,7 +109,7 @@
               </div>
             </div>
 
-            <a href="/"
+            <a href="./website_card.html"
               class="inline-flex items-center justify-center rounded-sm border border-indigo-300/20 bg-slate-950/60 px-4 py-2 text-sm font-medium text-indigo-200 transition hover:border-indigo-300/40 hover:bg-slate-900">
               Back to Dashboard
             </a>
@@ -119,13 +119,12 @@
         <section class="mb-8 grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
             <h2 id="headline" class="max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl"></h2>
-            <p id="deck" class="mt-4 max-w-3xl text-lg leading-8 text-slate-300"></p>
           </div>
 
           <div class="panel-shell">
             <div class="panel-inner p-5">
               <div class="flex flex-wrap items-center gap-3">
-                <p class="section-label text-s font-medium text-indigo-300/80">Confidence Assessment:</p>
+                <p class="section-label text-xs font-medium text-indigo-300/80">Confidence Assessment</p>
                 <span id="confidence-badge"
                   class="inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em]"></span>
               </div>
@@ -138,6 +137,10 @@
           </div>
         </section>
 
+        <section class="mb-8">
+          <p id="deck" class="max-w-5xl text-lg leading-8 text-slate-300"></p>
+        </section>
+
         <section class="mb-8 panel-shell">
           <div class="panel-inner p-6 sm:p-8">
             <p class="section-label text-xs font-medium text-indigo-300/80">Executive Summary</p>
@@ -147,56 +150,42 @@
 
         <section class="mb-8 panel-shell">
           <div class="panel-inner p-6 sm:p-8">
-            <p class="section-label text-xs font-medium text-indigo-300/80">Key Points</p>
-            <ul id="key-points-list" class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
+            <p class="section-label text-xs font-medium text-indigo-300/80">Primary Dynamics</p>
+            <div id="primary-dynamics-grid" class="mt-5 grid gap-5 xl:grid-cols-3"></div>
           </div>
         </section>
 
-        <section class="grid gap-6 lg:grid-cols-2">
-          <div class="panel-shell lg:col-span-2">
+        <section class="mb-8 panel-shell">
+          <div class="panel-inner p-6 sm:p-8">
+            <p class="section-label text-xs font-medium text-indigo-300/80">Constraints and Pressures</p>
+            <ul id="constraints-list" class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
+          </div>
+        </section>
+
+        <section class="mb-8 panel-shell">
+          <div class="panel-inner p-6 sm:p-8">
+            <p class="section-label text-xs font-medium text-indigo-300/80">Core Logic</p>
+            <p id="core-logic" class="mt-5 text-base leading-8 text-slate-200"></p>
+          </div>
+        </section>
+
+        <section class="mb-8 grid gap-6 lg:grid-cols-2">
+          <div class="panel-shell">
             <div class="panel-inner p-6 sm:p-8">
-              <p class="section-label text-xs font-medium text-indigo-300/80">Situation</p>
-              <div id="situation-list" class="mt-5 list-rail"></div>
+              <p class="section-label text-xs font-medium text-indigo-300/80">Key Dependencies</p>
+              <div id="dependencies-list" class="mt-5 list-rail compact"></div>
             </div>
           </div>
 
-          <div class="panel-shell lg:col-span-2">
+          <div class="panel-shell">
             <div class="panel-inner p-6 sm:p-8">
-              <p class="section-label text-xs font-medium text-indigo-300/80">Primary Dynamics</p>
-              <div id="primary-dynamics-grid" class="mt-5 grid gap-5 xl:grid-cols-3"></div>
+              <p class="section-label text-xs font-medium text-indigo-300/80">Tradeoffs</p>
+              <ul id="tradeoffs-list" class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
             </div>
           </div>
+        </section>
 
-          <div class="panel-shell lg:col-span-2">
-            <div class="panel-inner p-6 sm:p-8">
-              <p class="section-label text-xs font-medium text-indigo-300/80">Analytic Logic</p>
-              <div class="mt-5 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-                <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-                  <p class="section-label text-xs font-medium text-indigo-300/80">Core Logic</p>
-                  <p id="core-logic" class="mt-3 text-base leading-8 text-slate-200"></p>
-                  <div id="constraints-block" class="mt-6">
-                    <p class="section-label text-xs font-medium text-indigo-300/80">Constraints and Pressures</p>
-                    <ul id="constraints-list" class="mt-4 list-rail compact text-base leading-8 text-slate-200"></ul>
-                  </div>
-                </div>
-                <div class="grid gap-6">
-                  <div id="dependencies-block" class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-                    <p class="section-label text-xs font-medium text-indigo-300/80">Key Dependencies</p>
-                    <div id="dependencies-list" class="mt-4 list-rail compact"></div>
-                  </div>
-                  <div id="tradeoffs-block" class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-                    <p class="section-label text-xs font-medium text-indigo-300/80">Tradeoffs</p>
-                    <ul id="tradeoffs-list" class="mt-4 list-rail compact text-sm leading-7 text-slate-200"></ul>
-                  </div>
-                </div>
-              </div>
-              <div id="mechanism-block" class="mt-6 rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-                <p class="section-label text-xs font-medium text-indigo-300/80">Signaling or Mechanism</p>
-                <div id="mechanism-list" class="mt-4 grid gap-4 lg:grid-cols-2"></div>
-              </div>
-            </div>
-          </div>
-
+        <section class="mb-8 grid gap-6 lg:grid-cols-3">
           <div class="panel-shell">
             <div class="panel-inner p-6 sm:p-8">
               <p class="section-label text-xs font-medium text-indigo-300/80">Risks</p>
@@ -217,31 +206,35 @@
               <ul id="open-questions-list" class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
             </div>
           </div>
+        </section>
 
-          <div class="panel-shell">
-            <div class="panel-inner p-6 sm:p-8">
-              <p class="section-label text-xs font-medium text-indigo-300/80">Interpretation Guardrails</p>
-              <div id="guardrails-block" class="mt-5 grid gap-4"></div>
+        <section class="mb-8 panel-shell">
+          <div class="panel-inner p-6 sm:p-8">
+            <p class="section-label text-xs font-medium text-indigo-300/80">Interpretation Guardrails</p>
+            <div id="guardrails-block" class="mt-5 grid gap-4"></div>
+          </div>
+        </section>
+
+        <section id="information-gaps-block" class="mb-8 panel-shell">
+          <div class="panel-inner p-6 sm:p-8">
+            <p class="section-label text-xs font-medium text-indigo-300/80">Information Gaps</p>
+            <div class="mt-5 grid gap-6 lg:grid-cols-2">
+              <div id="analysis-limitations-block" class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+                <p class="section-label text-xs font-medium text-indigo-300/80">Analysis Limitations</p>
+                <ul id="analysis-limitations-list" class="mt-4 list-rail compact text-base leading-8 text-slate-200">
+                </ul>
+              </div>
+              <div id="missing-critical-information-block"
+                class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+                <p class="section-label text-xs font-medium text-indigo-300/80">Missing Critical Information</p>
+                <ul id="missing-critical-information-list"
+                  class="mt-4 list-rail compact text-base leading-8 text-slate-200"></ul>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="analysis-limitations-block" class="mt-6 panel-shell">
-          <div class="panel-inner p-6 sm:p-8">
-            <p class="section-label text-xs font-medium text-indigo-300/80">Analysis Limitations</p>
-            <ul id="analysis-limitations-list" class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
-          </div>
-        </section>
-
-        <section id="missing-critical-information-block" class="mt-6 panel-shell">
-          <div class="panel-inner p-6 sm:p-8">
-            <p class="section-label text-xs font-medium text-indigo-300/80">Missing Critical Information</p>
-            <ul id="missing-critical-information-list"
-              class="mt-5 list-rail compact text-base leading-8 text-slate-200"></ul>
-          </div>
-        </section>
-
-        <section id="sources-block" class="mt-6 panel-shell">
+        <section id="sources-block" class="panel-shell">
           <div class="panel-inner p-6 sm:p-8">
             <p class="section-label text-xs font-medium text-indigo-300/80">Sources</p>
             <div id="sources-list" class="mt-5 grid gap-4"></div>
@@ -272,16 +265,6 @@
         });
       });
     });
-    const labelMap = {
-      core_development: "Core Development",
-      immediate_context: "Immediate Context",
-      diplomatic_status: "Diplomatic Status",
-      military_status: "Military Status",
-      market_effect: "Market Effect",
-      system_state: "System State",
-      process_status: "Process Status",
-      information_status: "Information Status"
-    };
 
     const confidenceMap = {
       low: "bg-rose-500/15 text-rose-200 border border-rose-400/30",
@@ -331,61 +314,6 @@
         .replace(/^-|-$/g, "");
     }
 
-    async function loadEventDetail() {
-      const response = await fetch("/api/events");
-      const events = await response.json();
-
-      const eventData =
-        events.find((item) => createSlug(item.headline) === slug) || events[0];
-
-      console.log("Selected event:", eventData);
-      console.log("Top-level keys:", Object.keys(eventData || {}));
-      console.log("analytic_logic:", eventData?.analytic_logic);
-      console.log("confidence:", eventData?.confidence);
-      console.log("source_links:", eventData?.source_links);
-
-      renderPage(eventData);
-    }
-
-    loadEventDetail();
-
-    function renderBulletList(elementId, items) {
-      const element = document.getElementById(elementId);
-      const safeItems = Array.isArray(items) ? items : [];
-      element.innerHTML = safeItems.map((item) => `
-        <li class="border-l border-indigo-300/25 pl-4 text-slate-200 break-words">${item}</li>
-      `).join("");
-    }
-
-    function renderSources(items) {
-      const safeItems = Array.isArray(items) ? items : [];
-      const section = document.getElementById("sources-block");
-      const list = document.getElementById("sources-list");
-
-      if (!safeItems.length) {
-        setVisibility("sources-block", false);
-        list.innerHTML = "";
-        return;
-      }
-
-      setVisibility("sources-block", true);
-      list.innerHTML = safeItems.map((item) => `
-        <article class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-          ${item.name ? `<p class="text-xs font-medium uppercase tracking-[0.18em] text-indigo-300/80 break-words">${item.name}</p>` : ""}
-          ${item.published_at ? `<p class="mt-2 text-sm leading-7 text-slate-400 break-words">${item.published_at}</p>` : ""}
-          ${item.url ? `
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer"
-              class="mt-3 block text-base font-semibold text-white break-words transition hover:text-indigo-200">
-              ${item.title || item.label || item.url}
-            </a>
-          ` : `
-            <p class="mt-3 text-base font-semibold text-white break-words">${item.title || item.label || "Untitled Source"}</p>
-          `}
-          ${item.url ? `<p class="mt-2 text-sm leading-7 text-indigo-200 break-all">${item.url}</p>` : ""}
-        </article>
-      `).join("");
-    }
-
     function setVisibility(elementId, isVisible) {
       const element = document.getElementById(elementId);
       if (!element) return;
@@ -397,6 +325,46 @@
       }
     }
 
+    async function loadEventDetail() {
+      const response = await fetch("http://127.0.0.1:8000/api/events");
+      const events = await response.json();
+
+      const eventData =
+        events.find((item) => createSlug(item.headline) === slug) || events[0];
+
+      renderPage(eventData);
+    }
+
+    function renderBulletList(elementId, items) {
+      const element = document.getElementById(elementId);
+      const safeItems = Array.isArray(items) ? items : [];
+      element.innerHTML = safeItems.map((item) => `
+        <li class="border-l border-indigo-300/25 pl-4 text-slate-200 break-words">${item}</li>
+      `).join("");
+    }
+
+    function renderSources(items) {
+      const safeItems = Array.isArray(items) ? items : [];
+      const list = document.getElementById("sources-list");
+
+      if (!safeItems.length) {
+        setVisibility("sources-block", false);
+        list.innerHTML = "";
+        return;
+      }
+
+      setVisibility("sources-block", true);
+      list.innerHTML = safeItems.map((item) => `
+        <article class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+          ${item.published_at ? `<p class="text-xs font-medium uppercase tracking-[0.18em] text-indigo-300/80 break-words">${item.published_at}</p>` : ""}
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer"
+            class="mt-3 block text-base font-semibold text-white break-words transition hover:text-indigo-200">
+            ${item.title}
+          </a>
+          <p class="mt-2 text-sm leading-7 text-indigo-200 break-all">${item.url}</p>
+        </article>
+      `).join("");
+    }
 
     function renderPage(data) {
       if (!data) {
@@ -423,14 +391,7 @@
         sourceBadge.classList.add("hidden");
       }
 
-      document.getElementById("situation-list").innerHTML = data.situation.map((item) => `
-        <div class="border-l border-indigo-300/25 pl-4">
-          <p class="section-label text-xs font-medium text-indigo-300/80">${labelMap[item.label] || item.label}</p>
-          <p class="mt-2 text-base leading-8 text-slate-200 break-words">${item.text}</p>
-        </div>
-      `).join("");
-
-      document.getElementById("primary-dynamics-grid").innerHTML = data.primary_dynamics.map((item) => `
+      document.getElementById("primary-dynamics-grid").innerHTML = (data.primary_dynamics || []).map((item) => `
         <article class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
           <div class="flex flex-wrap items-center gap-3">
             <h3 class="text-xl font-semibold text-white">${item.name}</h3>
@@ -438,33 +399,23 @@
           </div>
           <div class="mt-4 space-y-4 text-sm leading-7 text-slate-300">
             <p><span class="text-indigo-200">Role:</span> ${item.role}</p>
-            ${item.leverage_or_effect ? `<p><span class="text-indigo-200">Leverage or Effect:</span> ${item.leverage_or_effect}</p>` : ""}
+            <p><span class="text-indigo-200">Leverage or Effect:</span> ${item.leverage_or_effect}</p>
             <p><span class="text-indigo-200">Constraints:</span> ${item.constraints}</p>
           </div>
         </article>
       `).join("");
 
-      document.getElementById("core-logic").textContent = data.analytic_logic.core_logic;
-      document.getElementById("dependencies-list").innerHTML = data.analytic_logic.key_dependencies.map((item) => `
+      renderBulletList("constraints-list", data.constraints_and_pressures);
+      document.getElementById("core-logic").textContent = data.core_logic;
+
+      document.getElementById("dependencies-list").innerHTML = (data.key_dependencies || []).map((item) => `
         <div class="border-l border-indigo-300/25 pl-4">
           <p class="text-sm font-semibold text-white">${item.depends_on}</p>
           <p class="mt-1 text-sm leading-7 text-slate-300">Enables: ${item.enables}</p>
         </div>
       `).join("");
 
-      const tradeoffs = data.analytic_logic.tradeoffs || [];
-      renderBulletList("tradeoffs-list", tradeoffs);
-      setVisibility("tradeoffs-block", tradeoffs.length > 0);
-
-      const mechanisms = data.analytic_logic.signaling_or_mechanism || [];
-      document.getElementById("mechanism-list").innerHTML = mechanisms.map((item) => `
-        <article class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-          <p class="text-sm font-semibold text-white">${item.action_or_step}</p>
-          <p class="mt-3 text-sm leading-7 text-slate-300"><span class="text-indigo-200">Interpretation:</span> ${item.interpretation}</p>
-          ${item.target_or_relevance ? `<p class="mt-3 text-sm leading-7 text-slate-300"><span class="text-indigo-200">Target or Relevance:</span> ${item.target_or_relevance}</p>` : ""}
-        </article>
-      `).join("");
-      setVisibility("mechanism-block", mechanisms.length > 0);
+      renderBulletList("tradeoffs-list", data.tradeoffs);
 
       const riskOrder = {
         immediate: 0,
@@ -484,25 +435,12 @@
               ${riskMap[risk.time_horizon] || risk.time_horizon}
             </span>
           </div>
-          </div>
           <p class="mt-3 text-sm leading-7 text-slate-300">${risk.basis}</p>
         </article>
       `).join("");
 
-      const constraintsAndPressures = Array.isArray(data.constraints_and_pressures) ? data.constraints_and_pressures : [];
-      renderBulletList("constraints-list", constraintsAndPressures);
-      setVisibility("constraints-block", constraintsAndPressures.length > 0);
       renderBulletList("watch-list", data.what_to_watch);
-      renderBulletList("key-points-list", data.key_points);
       renderBulletList("open-questions-list", data.open_questions);
-
-      const analysisLimitations = data.confidence?.analysis_limitations || [];
-      renderBulletList("analysis-limitations-list", analysisLimitations);
-      setVisibility("analysis-limitations-block", analysisLimitations.length > 0);
-
-      const missingCriticalInformation = data.confidence?.missing_critical_information || [];
-      renderBulletList("missing-critical-information-list", missingCriticalInformation);
-      setVisibility("missing-critical-information-block", missingCriticalInformation.length > 0);
 
       document.getElementById("guardrails-block").innerHTML = `
         <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
@@ -513,17 +451,25 @@
           <p class="section-label text-xs font-medium text-indigo-300/80">Do Not Conclude</p>
           <p class="mt-3 text-base leading-8 text-slate-200">${data.interpretation_guardrails.do_not_conclude}</p>
         </div>
-        ${data.interpretation_guardrails.main_reader_risk ? `
-          <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-            <p class="section-label text-xs font-medium text-indigo-300/80">Main Reader Risk</p>
-            <p class="mt-3 text-base leading-8 text-slate-200">${readerRiskMap[data.interpretation_guardrails.main_reader_risk] || data.interpretation_guardrails.main_reader_risk}</p>
-          </div>
-        ` : ""}
+        <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+          <p class="section-label text-xs font-medium text-indigo-300/80">Main Reader Risk</p>
+          <p class="mt-3 text-base leading-8 text-slate-200">${readerRiskMap[data.interpretation_guardrails.main_reader_risk] || data.interpretation_guardrails.main_reader_risk}</p>
+        </div>
       `;
 
-      renderSources(data.source_links);
+      const analysisLimitations = data.information_gaps?.analysis_limitations || [];
+      renderBulletList("analysis-limitations-list", analysisLimitations);
+      setVisibility("analysis-limitations-block", analysisLimitations.length > 0);
+
+      const missingCriticalInformation = data.information_gaps?.missing_critical_information || [];
+      renderBulletList("missing-critical-information-list", missingCriticalInformation);
+      setVisibility("missing-critical-information-block", missingCriticalInformation.length > 0);
+      setVisibility("information-gaps-block", analysisLimitations.length > 0 || missingCriticalInformation.length > 0);
+
+      renderSources(data.sources);
     }
 
+    loadEventDetail();
   </script>
   <button id="scrollTopBtn" class="group fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none
        flex items-center justify-center
@@ -533,15 +479,12 @@
        shadow-xl backdrop-blur
        transition-all duration-300 ease-out
        hover:-translate-y-[2px] hover:shadow-2xl hover:border-indigo-300/60">
-    <!-- glow layer -->
     <div
       class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-sm transition-opacity duration-300 group-hover:opacity-30">
     </div>
 
-    <!-- inner surface -->
     <div class="absolute inset-px rounded-full bg-[#071224]"></div>
 
-    <!-- arrow icon -->
     <svg class="relative h-5 w-5 text-indigo-200" fill="none" stroke="currentColor" stroke-width="2"
       viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
