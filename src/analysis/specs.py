@@ -1652,8 +1652,22 @@ STRICT RULE:
 
 * Describe WHAT happened and WHY it matters
 * Do NOT explain system mechanics
-* Do NOT include causal structure
+* Allow high-level causality (e.g., "because", "driven by", "in response to")
+* Do NOT include detailed system mechanics or multi-step causal chains
 * Do NOT restate actor roles in detail
+
+STRICT META EXCLUSION RULE:
+
+* Do NOT include:
+  - reporting quality
+  - attribution uncertainty
+  - evidence limitations
+  - phrases like "the reporting indicates", "the reporting does not show", etc.
+
+* All discussion of evidence quality, attribution uncertainty, or missing data
+  MUST appear ONLY in:
+  - CONFIDENCE
+  - INFORMATION_GAPS
 
 ---
 
