@@ -1409,12 +1409,12 @@ EVENT_SUMMARY_SCHEMA = {
         },
         "what_to_watch": {
             "type": "array",
-            "minItems": 5,
-            "maxItems": 9,
+            "minItems": 4,
+            "maxItems": 6,
             "items": {
                 "type": "string",
-                "minLength": 70,
-                "maxLength": 220,
+                "minLength": 50,
+                "maxLength": 200,
             },
         },
         "open_questions": {
@@ -1749,9 +1749,13 @@ RISKS
 
 WHAT_TO_WATCH
 
-* 5–9 concrete, observable indicators
+* 4-6 concrete, observable indicators
 * Must be monitorable signals, not vague topics
-* Should indicate what would change the assessment
+* Each signal must reference a specific domain (e.g., prices, statements, traffic, policy actions)
+* Each signal must directly affect the core logic or change expected outcomes
+* Each item should be a concise signal, not a full sentence explanation
+* Prefer compressed phrasing over full descriptive sentences
+* Avoid filler like "Any indication that..." or "Whether..."
 
 OPEN_QUESTIONS
 

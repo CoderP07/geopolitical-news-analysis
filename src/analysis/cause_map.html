@@ -1,3 +1,30 @@
+<!--
+Cause Map Prototype (Not included in final UI)
+Future feature: structured → visual reasoning layer
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cause Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #020816;
+            color: #f4f7fb;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::marker {
+            content: "";
+        }
+    </style>
+</head>
+
 <main class="min-h-screen px-4 py-6">
     <div class="max-w-5xl mx-auto">
         <a id="back-link" class="inline-block mb-4 text-sm text-indigo-300 hover:text-indigo-200 hover:underline">
@@ -35,50 +62,43 @@
         document.title = `${data.headline} | Cause Map`;
 
         container.innerHTML = `
-        <!-- HEADLINE -->
-        <div class="text-center">
+        <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-white">${data.headline}</h1>
         </div>
 
-        ${arrow()}
+        ${section("Actors + Constraints", `
+            <div class="space-y-3">
+                ${(data.primary_dynamics || []).map(d => `
+                    <div>
+                        <div class="text-indigo-300 text-xs uppercase">${d.type}</div>
+                        <div class="text-white font-semibold">${d.name}</div>
+                    </div>
+                `).join("")}
 
-        <!-- PRIMARY DYNAMICS -->
-        <div class="grid gap-4 md:grid-cols-2">
-            ${(data.primary_dynamics || []).map(d => card(`
-                <p class="text-indigo-300 text-sm uppercase">${d.type}</p>
-                <h3 class="text-lg font-semibold text-white">${d.name}</h3>
-                <p class="text-slate-300 text-sm mt-2">${d.role}</p>
-            `)).join("")}
-        </div>
-
-        ${arrow()}
-
-        <!-- CONSTRAINTS -->
-        ${card(`
-            <h2 class="text-indigo-300 font-semibold mb-2">Constraints & Pressures</h2>
-            <ul class="list-disc pl-5 text-slate-300 text-sm space-y-1">
-                ${data.constraints_and_pressures.map(c => `<li>${c}</li>`).join("")}
-            </ul>
+                <div class="mt-4 border-t border-indigo-300/20 pt-3">
+                    <ul class="list-disc pl-5 text-sm text-slate-300 space-y-1">
+                        ${(data.constraints_and_pressures || []).map(c => `<li>${c}</li>`).join("")}
+                    </ul>
+                </div>
+            </div>
         `)}
 
         ${arrow()}
 
-        <!-- CORE LOGIC -->
-        ${card(`
-            <h2 class="text-indigo-300 font-semibold mb-2">Core Logic</h2>
-            <p class="text-slate-300 text-sm">${data.core_logic}</p>
+        ${section("Core Logic", `
+            <p class="text-slate-300 text-sm leading-7">
+                ${data.core_logic}
+            </p>
         `)}
 
         ${arrow()}
 
-        <!-- RISKS -->
-        ${card(`
-            <h2 class="text-indigo-300 font-semibold mb-2">Risks</h2>
-            <ul class="text-slate-300 text-sm space-y-2">
-                ${data.risks.map(r => `
+        ${section("Outcomes (Risks)", `
+            <ul class="space-y-3">
+                ${(data.risks || []).map(r => `
                     <li>
-                        <span class="font-semibold text-white">${r.risk}</span>
-                        <div class="text-xs text-indigo-300">${r.time_horizon}</div>
+                        <div class="text-xs uppercase text-indigo-300">${r.time_horizon}</div>
+                        <div class="text-white font-semibold">${r.risk}</div>
                     </li>
                 `).join("")}
             </ul>
@@ -86,15 +106,36 @@
 
         ${arrow()}
 
-        <!-- WHAT TO WATCH -->
-        ${card(`
-            <h2 class="text-indigo-300 font-semibold mb-2">What to Watch</h2>
-            <ul class="list-disc pl-5 text-slate-300 text-sm space-y-1">
-                ${data.what_to_watch.map(w => `<li>${w}</li>`).join("")}
+        ${section("Signals (What to Watch)", `
+            <ul class="list-disc pl-5 text-sm text-slate-300 space-y-1">
+                ${(data.what_to_watch || []).slice(0, 6).map(w => `<li>${w}</li>`).join("")}
             </ul>
         `)}
     `;
         console.log(data);
+    }
+
+    function section(title, content) {
+        return `
+        <details class="rounded border border-indigo-300/20 bg-slate-900/70 p-4 group">
+            <summary class="cursor-pointer list-none flex justify-between items-center">
+                <span class="text-white font-semibold">${title}</span>
+                <span class="text-indigo-400 group-open:rotate-180 transition">▼</span>
+            </summary>
+
+            <div class="mt-4">
+                ${content}
+            </div>
+        </details>
+    `;
+    }
+
+    function arrow() {
+        return `
+        <div class="flex justify-center my-2">
+            <div class="text-indigo-400 text-xl">↓</div>
+        </div>
+    `;
     }
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -103,20 +144,4 @@
 
         loadCauseMap();
     });
-
-    function card(content) {
-        return `
-        <div class="rounded border border-indigo-300/20 bg-slate-900/70 p-4">
-            ${content}
-        </div>
-    `;
-    }
-
-    function arrow() {
-        return `
-        <div class="flex justify-center">
-            <div class="text-indigo-400 text-xl">↓</div>
-        </div>
-    `;
-    }
 </script>
