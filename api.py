@@ -50,17 +50,28 @@ def get_events():
 
     cur.execute(
         """
-        SELECT event_json
+        SELECT event_json, source_links
         FROM website_event_summaries
         WHERE summary_version = (
             SELECT MAX(summary_version)
             FROM website_event_summaries
         )
         ORDER BY created_at DESC, event_summary_id DESC;
-    """
+        """
     )
+
     rows = cur.fetchall()
     cur.close()
     conn.close()
 
-    return [row[0] for row in rows]
+    events = []
+    for event_json, source_links in rows:
+        event = event_json or {}
+
+        if source_links:
+            event["source_links"] = source_links
+            event["sources"] = source_links
+
+        events.append(event)
+
+    return events

@@ -357,11 +357,17 @@
       list.innerHTML = safeItems.map((item) => `
         <article class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
           ${item.published_at ? `<p class="text-xs font-medium uppercase tracking-[0.18em] text-indigo-300/80 break-words">${item.published_at}</p>` : ""}
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer"
-            class="mt-3 block text-base font-semibold text-white break-words transition hover:text-indigo-200">
-            ${item.title}
-          </a>
-          <p class="mt-2 text-sm leading-7 text-indigo-200 break-all">${item.url}</p>
+
+          ${item.url ? `
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer"
+              class="mt-3 block text-base font-semibold text-white break-words transition hover:text-indigo-200">
+              ${item.title}
+            </a>
+            <p class="mt-2 text-sm leading-7 text-indigo-200 break-all">${item.url}</p>
+          ` : `
+            <p class="mt-3 text-base font-semibold text-white break-words">${item.title}</p>
+          `}
+
         </article>
       `).join("");
     }
@@ -466,7 +472,12 @@
       setVisibility("missing-critical-information-block", missingCriticalInformation.length > 0);
       setVisibility("information-gaps-block", analysisLimitations.length > 0 || missingCriticalInformation.length > 0);
 
-      renderSources(data.sources);
+      const sourceItems =
+        Array.isArray(data.source_links) && data.source_links.length
+          ? data.source_links
+          : data.sources;
+
+      renderSources(sourceItems);
     }
 
     loadEventDetail();
