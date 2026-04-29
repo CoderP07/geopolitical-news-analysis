@@ -498,14 +498,16 @@
 
     loadEventDetail();
   </script>
-  <button id="scrollTopBtn" class="group fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none
-       flex items-center justify-center
-       w-12 h-12 rounded-full
-       bg-slate-950/80
-       border border-indigo-400/30
-       shadow-xl backdrop-blur
-       transition-all duration-300 ease-out
-       hover:-translate-y-[2px] hover:shadow-2xl hover:border-indigo-300/60">
+  <button id="scrollTopBtn" class="group fixed right-6 z-50
+         opacity-0 pointer-events-none
+         flex items-center justify-center
+         w-12 h-12 rounded-full
+         bg-slate-950/80
+         border border-indigo-400/30
+         shadow-xl backdrop-blur
+         transition-all duration-300 ease-out
+         hover:-translate-y-[2px] hover:shadow-2xl hover:border-indigo-300/60"
+    style="bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);">
     <div
       class="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-20 blur-sm transition-opacity duration-300 group-hover:opacity-30">
     </div>
