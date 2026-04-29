@@ -6,7 +6,6 @@ import psycopg2
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="src/analysis"), name="static")
 
@@ -48,8 +47,7 @@ def get_events():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute(
-        """
+    cur.execute("""
         SELECT event_json, source_links
         FROM website_event_summaries
         WHERE summary_version = (
@@ -57,8 +55,7 @@ def get_events():
             FROM website_event_summaries
         )
         ORDER BY created_at DESC, event_summary_id DESC;
-        """
-    )
+        """)
 
     rows = cur.fetchall()
     cur.close()
@@ -75,3 +72,8 @@ def get_events():
         events.append(event)
 
     return events
+
+
+@app.get("/cause_map.html")
+def cause_map():
+    return FileResponse("src/analysis/cause_map.html")
