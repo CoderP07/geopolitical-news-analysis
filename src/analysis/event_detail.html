@@ -516,26 +516,8 @@
       renderSources(sourceItems);
     }
 
-    renderPage({
-      headline: "Test Event",
-      deck: "Test deck",
-      executive_summary: "Test summary",
-      confidence: { level: "medium", reason: "Test reason" },
-      interpretation_guardrails: {
-        reasonable_takeaway: "Takeaway",
-        do_not_conclude: "Don't conclude this",
-        main_reader_risk: "overgeneralization"
-      },
-      primary_dynamics: [],
-      constraints_and_pressures: [],
-      core_logic: "",
-      key_dependencies: [],
-      tradeoffs: [],
-      risks: [],
-      what_to_watch: [],
-      open_questions: [],
-      information_gaps: {}
-    });
+    loadEventDetail();
+
   </script>
   <button id="scrollTopBtn" class="group fixed right-6 z-50
          opacity-0 pointer-events-none
