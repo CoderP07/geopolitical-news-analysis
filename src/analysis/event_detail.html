@@ -305,6 +305,13 @@
       overgeneralization: "Overgeneralization"
     };
 
+    const readerRiskDefinitions = {
+      confusion: "The situation is structurally complex or unclear, making it difficult to form a coherent understanding.",
+      false_certainty: "The reporting may create an illusion of clarity or resolution where uncertainty still dominates.",
+      causal_misread: "A sequence of events may be mistaken for a cause-and-effect relationship",
+      overgeneralization: "Specific developments may be incorrectly applied as broad trends or systemic conclusions."
+    };
+
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("event");
 
@@ -467,19 +474,30 @@
       renderBulletList("open-questions-list", data.open_questions);
 
       document.getElementById("guardrails-block").innerHTML = `
-        <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-          <p class="section-label text-xs font-medium text-indigo-300/80">Reasonable Takeaway</p>
-          <p class="mt-3 text-base leading-8 text-slate-200">${data.interpretation_guardrails.reasonable_takeaway}</p>
+      <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+        <p class="section-label text-xs font-medium text-indigo-300/80">Reasonable Takeaway</p>
+        <p class="mt-3 text-base leading-8 text-slate-200">${data.interpretation_guardrails.reasonable_takeaway}</p>
+      </div>
+
+      <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+        <p class="section-label text-xs font-medium text-indigo-300/80">Do Not Conclude</p>
+        <p class="mt-3 text-base leading-8 text-slate-200">${data.interpretation_guardrails.do_not_conclude}</p>
+      </div>
+
+      <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
+        <p class="section-label text-xs font-medium text-indigo-300/80">Main Reader Risk</p>
+
+        <div class="mt-3 text-base leading-8 text-slate-200 space-y-2">
+          <p class="font-semibold text-white">
+            ${readerRiskMap[data.interpretation_guardrails.main_reader_risk] || data.interpretation_guardrails.main_reader_risk}
+          </p>
+
+          <p class="text-sm text-slate-400 max-w-md">
+            ${readerRiskDefinitions[data.interpretation_guardrails.main_reader_risk] || ""}
+          </p>
         </div>
-        <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-          <p class="section-label text-xs font-medium text-indigo-300/80">Do Not Conclude</p>
-          <p class="mt-3 text-base leading-8 text-slate-200">${data.interpretation_guardrails.do_not_conclude}</p>
-        </div>
-        <div class="rounded-sm border border-indigo-300/15 bg-slate-950/70 p-5">
-          <p class="section-label text-xs font-medium text-indigo-300/80">Main Reader Risk</p>
-          <p class="mt-3 text-base leading-8 text-slate-200">${readerRiskMap[data.interpretation_guardrails.main_reader_risk] || data.interpretation_guardrails.main_reader_risk}</p>
-        </div>
-      `;
+      </div>
+    `;
 
       const analysisLimitations = data.information_gaps?.analysis_limitations || [];
       renderBulletList("analysis-limitations-list", analysisLimitations);
@@ -498,7 +516,26 @@
       renderSources(sourceItems);
     }
 
-    loadEventDetail();
+    renderPage({
+      headline: "Test Event",
+      deck: "Test deck",
+      executive_summary: "Test summary",
+      confidence: { level: "medium", reason: "Test reason" },
+      interpretation_guardrails: {
+        reasonable_takeaway: "Takeaway",
+        do_not_conclude: "Don't conclude this",
+        main_reader_risk: "overgeneralization"
+      },
+      primary_dynamics: [],
+      constraints_and_pressures: [],
+      core_logic: "",
+      key_dependencies: [],
+      tradeoffs: [],
+      risks: [],
+      what_to_watch: [],
+      open_questions: [],
+      information_gaps: {}
+    });
   </script>
   <button id="scrollTopBtn" class="group fixed right-6 z-50
          opacity-0 pointer-events-none
