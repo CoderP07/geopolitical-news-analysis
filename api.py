@@ -23,9 +23,9 @@ def event_detail():
 # allow your frontend to call this API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten later
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["https://geopolitical-news-analysis.onrender.com"],
+    allow_credentials=False,
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
 

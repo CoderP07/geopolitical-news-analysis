@@ -106,6 +106,15 @@
     const eventGrid = document.getElementById("event-grid");
     const events = window.EVENT_SUMMARIES || [];
 
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
     function createSlug(text) {
       return text
         .toLowerCase()
@@ -125,7 +134,7 @@
               <div class="flex items-start justify-between gap-6">
                 <div class="flex flex-col gap-3">
                   <h3 class="max-w-[18rem] text-3xl font-semibold leading-tight text-white">
-                    ${eventItem.headline}
+                    ${escapeHTML(eventItem.headline)}
                   </h3>
                   <div class="h-0.5 w-8 bg-indigo-400"></div>
                 </div>
@@ -137,7 +146,7 @@
               </div>
 
               <p class="relative mt-6 max-w-md text-lg leading-9 text-slate-300">
-                ${eventItem.deck}
+                ${escapeHTML(eventItem.deck)}
               </p>
             </div>
           </article>
