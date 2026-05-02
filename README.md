@@ -91,6 +91,9 @@ The frontend presents this as a clean, structured analysis interface.
 - Generate causal maps from structured outputs
 - Add interactive visualization layer
 - Improve cross-event linking and trend detection
+- Improve deterministic classification and category weights
+- Select specialized LLM models for each task (e.g., classification, event analysis, and final summary) instead of using GPT-5.4-mini for all steps
+- Expand into political actor analysis as the election cycle approaches 
 
 ## Reliability and Quality Controls
 
