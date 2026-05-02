@@ -574,13 +574,11 @@ FIELDS:
     field_blocks = []
 
     for i, r in enumerate(repairs, start=1):
-        field_blocks.append(
-            f"""{i}.
+        field_blocks.append(f"""{i}.
 path: {r.path}
 reason: {r.reason}
 current_text: {r.current_text}
-"""
-        )
+""")
 
     return header + "\n\n" + "\n".join(field_blocks)
 

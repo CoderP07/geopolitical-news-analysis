@@ -33,6 +33,7 @@ from analysis.summary_export import (
     get_connection,
     load_event_summaries_for_website,
     dedupe_events_for_website,
+    filter_publishable_events,
     write_events_to_website_table,
 )
 
@@ -252,9 +253,10 @@ def run_pipeline():
     # Delete old summaries (valid and invalid) beyond retention period to keep DB clean.
     delete_old_event_summaries(retention_days=4)
 
-    # 10. Export valid summaries to frontend events.js
+    # 10. Export valid summaries to frontend
     events = load_event_summaries_for_website(summary_version="v2")
     events = dedupe_events_for_website(events)
+    events = filter_publishable_events(events)
     write_events_to_website_table(events, summary_version="v2")
 
     print(f"[EXPORT] wrote {len(events)} events to website_event_summaries")

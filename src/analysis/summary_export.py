@@ -211,6 +211,24 @@ def load_event_summaries_for_website(summary_version: str = "v1") -> list[dict]:
     return events
 
 
+def filter_publishable_events(events: list[dict]) -> list[dict]:
+    publishable = []
+
+    for event in events:
+        source_detail = event.get("confidence", {}).get("source_detail_level")
+
+        if source_detail not in ("medium", "high"):
+            print(
+                f"[EXPORT SKIP] source_detail={source_detail} "
+                f"headline={event.get('headline')}"
+            )
+            continue
+
+        publishable.append(event)
+
+    return publishable
+
+
 if __name__ == "__main__":
     events = load_event_summaries_for_website(summary_version="v1")
     events = dedupe_events_for_website(events)
